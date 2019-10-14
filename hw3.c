@@ -94,13 +94,13 @@ void eval(char *cmdline){
 			if(waitpid(pid1, &stat, 0)<0){
 				unix_error("waitfg: waitpid error");
 			}
-			else{printf("pid:%d status:%d\n", pid1, stat);}
+			else{printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));}
 			close(pipefd[1]);
 			int stat2;
 			if(waitpid(pid2, &stat2, 0)<0){
 				unix_error("waitfg:(2) waitpis error");
 			}
-			else{printf("pid:%d status:%d\n", pid2, stat2);}
+			else{printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));}
 			return;
 		}
 		
@@ -119,7 +119,7 @@ void eval(char *cmdline){
 				if(waitpid(pid1, &stat, 0) < 0){
 					unix_error("waitfg-semi: waitpid error");
 				}
-				printf("pid:%d status:%d\n", pid1, stat);
+				printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
 				
 				if((pid2 = fork()) == 0){
 					close(pipefd[1]);
@@ -134,7 +134,7 @@ void eval(char *cmdline){
 				if(waitpid(pid2, &stat2, 0) < 0){
 					unix_error("waitpid-semi: waitpid2 error");
 				}
-				printf("pid:%d status:%d\n", pid2, stat2);
+				printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));
 			}
 			return;
 		}
