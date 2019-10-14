@@ -258,7 +258,7 @@ int parseline(char *buf, char **argv, char **cmd1, char **cmd2, int *semi){
 
 // SIGINT handler
 void sigint_handler(int sig){
-	printf("\ncaught SIGINT!\n");
+	printf("\ncaught sigint\n");
 //	exit(0);
 	
 }
