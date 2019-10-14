@@ -94,13 +94,14 @@ void eval(char *cmdline){
 			if(waitpid(pid1, &stat, 0)<0){
 				unix_error("waitfg: waitpid error");
 			}
-			else{printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));}
+			//printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
 			close(pipefd[1]);
 			int stat2;
 			if(waitpid(pid2, &stat2, 0)<0){
 				unix_error("waitfg:(2) waitpis error");
 			}
 			else{printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));}
+			printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
 			return;
 		}
 		
