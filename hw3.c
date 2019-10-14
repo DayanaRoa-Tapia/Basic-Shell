@@ -100,8 +100,8 @@ void eval(char *cmdline){
 			if(waitpid(pid2, &stat2, 0)<0){
 				unix_error("waitfg:(2) waitpis error");
 			}
-			else{printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));}
 			printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
+			printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));
 			return;
 		}
 		
