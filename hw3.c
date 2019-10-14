@@ -114,14 +114,13 @@ void eval(char *cmdline){
 					printf("%s: Command not found.\n", cmd1[0]);
 					exit(0);
 				}
-			}
-			else{
 				int stat;
 				if(waitpid(pid1, &stat, 0) < 0){
 					unix_error("waitfg-semi: waitpid error");
 				}
 				printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
-				
+			}
+			else{
 				if((pid2 = fork()) == 0){
 					close(pipefd[1]);
 					dup2(pipefd[0],0);
@@ -158,7 +157,7 @@ void eval(char *cmdline){
 			if(waitpid(pid, &status, 0)<0){
 				unix_error("waitfg: waitpid error");
 			}
-			printf("pid:%d status:%d\n", pid, status);
+			printf("pid:%d status:%d\n", pid, WEXITSTATUS(status));
 		}
 		else{
 			printf("%d %s", pid, cmdline);
