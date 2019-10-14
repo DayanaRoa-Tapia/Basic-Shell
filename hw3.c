@@ -17,7 +17,7 @@ int main(){
 	char cmdline[MAXLINE];
 
 	while(1){
-		printf("CS361> ");
+		printf("CS361 >");
 		fgets(cmdline, MAXLINE, stdin);
 		if(feof(stdin)){
 			exit(0);
