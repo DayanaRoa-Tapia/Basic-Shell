@@ -108,32 +108,30 @@ void eval(char *cmdline){
 		//handles semicolon seperated sommands
 		if(cmd1[0] != NULL && cmd2[0] != NULL && semi == 1){
 			if((pid1 = fork()) == 0){
-				close(pipefd[0]);
-				dup2(pipefd[1],1);
 				if(execvp(cmd1[0], cmd1) < 0){
 					printf("%s: Command not found.\n", cmd1[0]);
 					exit(0);
 				}
+				
+				
+			}
+			else{
 				int stat;
 				if(waitpid(pid1, &stat, 0) < 0){
 					unix_error("waitfg-semi: waitpid error");
 				}
-				printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
-			}
-			else{
+				
 				if((pid2 = fork()) == 0){
-					close(pipefd[1]);
-					dup2(pipefd[0],0);
 					if(execvp(cmd2[0], cmd2) < 0){
 						printf("%s: Command not found.\n", cmd2[0]);
 						exit(0);
 					}
 				}
-				close(pipefd[1]);
 				int stat2;
 				if(waitpid(pid2, &stat2, 0) < 0){
 					unix_error("waitpid-semi: waitpid2 error");
 				}
+				printf("pid:%d status:%d\n", pid1, WEXITSTATUS(stat));
 				printf("pid:%d status:%d\n", pid2, WEXITSTATUS(stat2));
 			}
 			return;
