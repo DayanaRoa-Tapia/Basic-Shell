@@ -26,10 +26,10 @@ int main(){
 		
 		//Intall the SIGINT handler
                 if(signal(SIGINT, sigint_handler) == SIG_ERR){
-                        unix_error("signal error");
+                        unix_error("caught sigint");
                 }
 		if(signal(SIGTSTP, sigint_handlerZ) == SIG_ERR){
-			unix_error("signal erro Z");
+			unix_error("caught sigtstp");
 		}
 		else{
 
